@@ -5,21 +5,31 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
-  ]
+	routes: [
+		{
+			path: '/',
+			name: 'home',
+			component: Home
+		},
+		{
+			path: '/Pizza',
+			name: 'Pizza',
+			component: () => import(/* webpackChunkName: "about" */ './views/mainViews/Pizza.vue')
+		},
+		{
+			path: '/Snacks',
+			name: 'Snacks',
+			component: () => import(/* webpackChunkName: "about" */ './views/mainViews/Snacks.vue')
+		},
+		{
+			path: '/Dessert',
+			name: 'Dessert',
+			component: () => import(/* webpackChunkName: "about" */ './views/mainViews/Dessert.vue')
+		},
+		{
+			path: '/Drinks',
+			name: 'Drinks',
+			component: () => import(/* webpackChunkName: "about" */ './views/mainViews/Drinks.vue')
+		}
+	]
 })

@@ -64,8 +64,8 @@ export default {
 			this.doneTodosCount
 		},
 	},
-	// mounted(){
-  // 	this.getWindowWidth()
-  // }
+	mounted(){
+  	//localStorage.removeItem('color_site')
+  }
 }
 </script>

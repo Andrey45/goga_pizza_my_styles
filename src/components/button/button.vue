@@ -12,7 +12,6 @@
       <slot />
     </button>
     <router-link
-      ref="rut"
       v-if="router"
       :class="classes"
       :to="to"
@@ -98,12 +97,6 @@ export default {
 					border: '1px solid'+ this.color,
 				}
 			}
-			// if(this.outlined && this.text){
-			// 	return {
-			// 		color: this.color,
-			// 		border: '1px solid'+ this.color,
-			// 	}
-			// }
 			if(this.router){
 				if (to === this.$route.path){
 					return {
@@ -117,19 +110,16 @@ export default {
 				}
 			}
 			else {
-				// return {
-				// 	color: '#FFFFFF',
-				// 	backgroundColor: this.color,
-				// }
+				return {
+					color: '#FFFFFF',
+					backgroundColor: this.color,
+				}
 			}
 		},
 		// Функция наведения на элемент
 		hover(){
 			if (!this.text && !this.outlined && !this.router && !this.icon) {
 				this.$refs.myBut.style.boxShadow = '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
-			}
-			if (this.router) {
-				this.$refs.rut.style.backgroundColor = hexInrgba(this.color, 0.3)
 			}
 			else {
 				this.$refs.myBut.style.backgroundColor = hexInrgba(this.color, 0.3)
@@ -140,15 +130,9 @@ export default {
 			if (!this.text && !this.outlined && !this.router) {
 				this.$refs.myBut.style.boxShadow = '0 0 0'
 			}
-			if (this.router) {
-				this.$refs.rut.style.backgroundColor = 'transparent'
-			}
 			else {
 				this.$refs.myBut.style.backgroundColor = 'transparent'
 			}
-		},
-		rout(to){
-			this.$router.push({path: to})
 		}
 	}
 }

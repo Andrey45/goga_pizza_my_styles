@@ -51,23 +51,45 @@ export default {
 				'v-but-font': true,
 				'v-but--icon': this.icon,
 				'v-but--router': this.router,
-				'v-but--text': this.text,
-				'v-but--outlined': this.outlined,
+				...this.DroupClass()
 			}
 		}
 	},
 	methods:{
 		// Функция определения стилей
-		StyleRender(to){
-			if (this.text) {
+		DroupClass(){
+			if (this.outlined && this.text){
 				return{
-					color: this.color,
+				  'v-but-text-outlined': true
 				}
 			}
-			if (this.outlined){
+			if (this.outlined && !this.text) {
+				return {
+					'v-but--outlined': true
+				}
+			}
+			if (this.text && !this.outlined) {
+				return {
+					'v-but--text': true
+				}
+			}
+		},
+		StyleRender(to){
+			if (this.outlined && this.text){
+				return{
+					color: this.color,
+					border: '1px solid'+ this.color,
+				}
+			}
+			if (this.outlined && !this.text) {
 				return {
 					color: this.color,
 					border: '1px solid'+ this.color,
+				}
+			}
+			if (this.text && !this.outlined) {
+				return {
+					color: this.color,
 				}
 			}
 			if(this.icon){
@@ -76,6 +98,12 @@ export default {
 					border: '1px solid'+ this.color,
 				}
 			}
+			// if(this.outlined && this.text){
+			// 	return {
+			// 		color: this.color,
+			// 		border: '1px solid'+ this.color,
+			// 	}
+			// }
 			if(this.router){
 				if (to === this.$route.path){
 					return {
@@ -89,10 +117,10 @@ export default {
 				}
 			}
 			else {
-				return {
-					color: '#FFFFFF',
-					backgroundColor: this.color,
-				}
+				// return {
+				// 	color: '#FFFFFF',
+				// 	backgroundColor: this.color,
+				// }
 			}
 		},
 		// Функция наведения на элемент
@@ -135,6 +163,7 @@ export default {
     width max-content
 
   .v-but
+    justify-content: center
     outline none
     border: 0
     letter-spacing .08em
@@ -167,7 +196,15 @@ export default {
   .v-but--outlined
     background-color transparent
     border-radius 4px
-
+  .v-but-text-outlined
+    align-items center
+    width 32px
+    height 32px
+    letter-spacing 0
+    font-weight 500
+    padding 6px
+    background-color transparent
+    border-radius 50%
   .v-but--router
     //text-decoration none
     border 0

@@ -20,10 +20,19 @@
           {{ $t('button.'+link.title) }}
         </v-button>
       </nav>
-      <v-dropsettings
-        id="drop"
-        class="icon-btn-group"
-      />
+      <div
+        class="conteiner"
+        style="justify-content: flex-end"
+      >
+        <drop-memu-translation
+          id="lang-drop"
+          class="lang-but"
+        />
+        <v-dropsettings
+          id="drop"
+          class="icon-btn-group"
+        />
+      </div>
     </div>
   </header>
 </template>
@@ -33,10 +42,12 @@ import {mapGetters} from 'vuex'
 import {TimelineLite} from "gsap"
 const timeline = new TimelineLite()
 import DropMenuSettings from "./button/DropMenuSettings";
+import DropMemuTranslation from "./button/DropMemuTranslation";
+import VButton from "./button/button";
 
 export default {
 	computed: mapGetters(['Colors', 'device']),
-	components: { 'v-dropsettings': DropMenuSettings},
+	components: {VButton, DropMemuTranslation, 'v-dropsettings': DropMenuSettings},
 	data: () => ({
 		isOpen: false,
 		links: [
@@ -78,6 +89,7 @@ export default {
 				.to('#ts8', .33,{y:-0, opacity: 1})
 		},
 		openDraw() {
+	    timeline.to('#lang-drop', .53, {x: -20})
 			timeline.to('#drop', .53, {x: -15})
 		}
 	}
@@ -107,6 +119,8 @@ export default {
         display inline-flex
         .rout
           transform translateY(-45px)
+      .lang-but
+        transform translateX(80px)
       .icon-btn-group
         /*display flex*/
         transform translateX(40px)
